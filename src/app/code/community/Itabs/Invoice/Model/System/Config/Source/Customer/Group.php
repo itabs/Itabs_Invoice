@@ -55,7 +55,7 @@ class Itabs_Invoice_Model_System_Config_Source_Customer_Group
                 $this->_options,
                 array(
                     'value' => '',
-                    'label' => Mage::helper('debit')->__('-- Please Select --')
+                    'label' => Mage::helper('invoice')->__('-- Please Select --')
                 )
             );
         }
