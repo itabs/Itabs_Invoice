@@ -1,4 +1,4 @@
 Itabs_Invoice
 =============
 
-Payment Method "Invoice"
+Provides the payment method "Invoice"..
