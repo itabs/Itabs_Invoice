@@ -31,7 +31,7 @@ Installation Instructions
 
 Uninstallation
 --------------
-To uninstall this extension you have to remove all extension files from your file system.`
+To uninstall this extension you have to remove all extension files from your file system.
 
 Support & Feature-Wishes
 ------------------------
