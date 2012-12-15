@@ -1,0 +1,35 @@
+<?php
+/**
+ * This file is part of the Itabs_Invoice module.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * @category  Itabs
+ * @package   Itabs_Invoice
+ * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
+ * @copyright 2011-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link      https://github.com/itabs/Itabs_Invoice
+ */
+?>
+<?php
+/* @var $this Itabs_Invoice_Block_Info */
+
+/* @var $method Itabs_Invoice_Model_Invoice */
+$method = $this->getMethod();
+?>
+<?php echo $this->escapeHtml($method->getTitle()) ?>
+    {{pdf_row_separator}}
+<?php echo $this->__('Your invoice is payable within %s days.', $method->getConfigData('payment_due'))?>
+    {{pdf_row_separator}}
+<?php if ($method->getConfigData('text_block_info')): ?>
+    <?php echo $method->getConfigData('text_block_info') ?>
+<?php endif; ?>

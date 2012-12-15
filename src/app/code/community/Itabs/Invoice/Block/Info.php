@@ -44,6 +44,18 @@ class Itabs_Invoice_Block_Info extends Mage_Payment_Block_Info
     }
 
     /**
+     * Sets the template for PDF print-outs
+     *
+     * @return string Text for PDF print-out
+     */
+    public function toPdf()
+    {
+        $this->setTemplate('invoice/pdf.phtml');
+
+        return $this->toHtml();
+    }
+
+    /**
      * Retrieve the payment method code
      *
      * @return string
