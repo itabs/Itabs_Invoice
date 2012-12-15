@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!-- 
+<!--
 /**
  * This file is part of the Itabs_Invoice module.
  *
@@ -16,7 +16,7 @@
  * @category  Itabs
  * @package   Itabs_Invoice
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2012 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2011-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      https://github.com/itabs/Itabs_Invoice
  */
@@ -154,7 +154,7 @@
 							<label>Minimum Order Count</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>60</sort_order>
-                            <comment>Default: "0" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method.</comment>                                                           
+                            <comment>Default: "0" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method.</comment>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
@@ -163,7 +163,7 @@
 							<label>Minimum Order Amount</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>65</sort_order>
-                            <comment>Default: "0" for disabled check | Minimum order amount (in the past) needed for the customer to use this payment method.</comment>                                                           
+                            <comment>Default: "0" for disabled check | Minimum order amount (in the past) needed for the customer to use this payment method.</comment>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>

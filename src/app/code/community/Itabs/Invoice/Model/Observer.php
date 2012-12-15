@@ -17,7 +17,7 @@
  * @category  Itabs
  * @package   Itabs_Invoice
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2012 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2011-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      https://github.com/itabs/Itabs_Invoice
  */
@@ -27,7 +27,7 @@
  * @category  Itabs
  * @package   Itabs_Invoice
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2012 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
+ * @copyright 2011-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  * @link      https://github.com/itabs/Itabs_Invoice
  */
@@ -46,15 +46,12 @@ class Itabs_Invoice_Model_Observer
      * allowed to order via Invoice.
      *
      * @magentoEvent payment_method_is_active
-     * @param Varien_Event_Observer $observer Observer
+     * @param  Varien_Event_Observer $observer Observer
      * @return void
      */
     public function paymentMethodIsActive($observer)
     {
         $methodInstance = $observer->getEvent()->getMethodInstance();
-
-        /* @var $session Mage_Customer_Model_Session */
-        $session = Mage::getSingleton('customer/session');
 
         // Check if method is Invoice
         if ($methodInstance->getCode() != 'invoice') {
@@ -66,12 +63,26 @@ class Itabs_Invoice_Model_Observer
             return;
         }
 
-        // Check if payment is allowed only for specific customer groups
-        if (!Mage::getStoreConfigFlag('payment/invoice/specificgroup_all')) {
-            $customerGroupId = Mage_Customer_Model_Group::NOT_LOGGED_IN_ID;
+        // Get preconditions for checks
+        $customerGroupId = Mage_Customer_Model_Group::NOT_LOGGED_IN_ID;
+        if (Mage::app()->getStore()->isAdmin()) {
+            /* @var $session Mage_Adminhtml_Model_Session_Quote */
+            $session = Mage::getSingleton('adminhtml/session_quote');
+            /* @var $customer Mage_Customer_Model_Customer */
+            $customer = $session->getCustomer();
+            $customerGroupId = $session->getQuote()->getCustomerGroupId();
+        } else {
+            /* @var $session Mage_Customer_Model_Session */
+            $session = Mage::getSingleton('customer/session');
+            /* @var $customer Mage_Customer_Model_Customer */
+            $customer = $session->getCustomer();
             if ($session->isLoggedIn()) {
                 $customerGroupId = $session->getCustomerGroupId();
             }
+        }
+
+        // Check if payment is allowed only for specific customer groups
+        if (!Mage::getStoreConfigFlag('payment/invoice/specificgroup_all')) {
             $allowedGroupIds = explode(',', Mage::getStoreConfig('payment/invoice/specificgroup'));
             if (!in_array($customerGroupId, $allowedGroupIds)) {
                 $observer->getEvent()->getResult()->isAvailable = false;
@@ -82,7 +93,7 @@ class Itabs_Invoice_Model_Observer
         // Check minimum orders count
         $minOrderCount = Mage::getStoreConfig('payment/invoice/customer_order_count');
         if ($minOrderCount > 0) {
-            $customerId = $session->getCustomerId();
+            $customerId = $customer->getId();
             if (is_null($customerId)) {
                 $observer->getEvent()->getResult()->isAvailable = false;
                 return;
@@ -120,7 +131,7 @@ class Itabs_Invoice_Model_Observer
     /**
      * Retrieve the order collection of a specific customer
      *
-     * @param int $customerId
+     * @param  int                                        $customerId
      * @return Mage_Sales_Model_Resource_Order_Collection
      */
     protected function _getCustomerOrders($customerId)
@@ -139,6 +150,7 @@ class Itabs_Invoice_Model_Observer
                 ->load();
             $this->_customerOrders = $orders;
         }
+
         return $this->_customerOrders;
     }
 }
