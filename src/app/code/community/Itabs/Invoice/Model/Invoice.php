@@ -72,7 +72,9 @@ class Itabs_Invoice_Model_Invoice extends Mage_Payment_Model_Method_Abstract
                 /* @var $invoice Mage_Sales_Model_Order_Invoice */
                 $invoice = $order->prepareInvoice();
                 $invoice->register()->capture();
-                Mage::getModel('core/resource_transaction')->addObject($invoice)->addObject($invoice->getOrder())->save();
+                Mage::getModel('core/resource_transaction')
+                    ->addObject($invoice)
+                    ->addObject($invoice->getOrder())->save();
                 $order->addRelatedObject($invoice);
 
                 $invoice->setState($this->getConfigData('invoice_state'));
