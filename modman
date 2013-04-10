@@ -1,0 +1,6 @@
+src/app/code/community/Itabs/Invoice/                       app/code/community/Itabs/Invoice/
+src/app/design/adminhtml/default/default/template/invoice/  app/design/adminhtml/default/default/template/invoice/
+src/app/design/frontend/base/default/template/invoice/      app/design/frontend/base/default/template/invoice/
+src/app/etc/modules/Itabs_Invoice.xml                       app/etc/modules/Itabs_Invoice.xml
+src/app/locale/de_DE/Itabs_Invoice.csv                      app/locale/de_DE/Itabs_Invoice.csv
+src/app/locale/en_US/Itabs_Invoice.csv                      app/locale/en_US/Itabs_Invoice.csv
