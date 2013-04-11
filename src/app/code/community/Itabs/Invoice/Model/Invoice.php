@@ -82,6 +82,10 @@ class Itabs_Invoice_Model_Invoice extends Mage_Payment_Model_Method_Abstract
                 if (Mage::getStoreConfigFlag('payment/'.$this->getCode().'/send_invoice_email')) {
                     $invoice->sendEmail();
                 }
+
+                // Add comment to order history
+                $order->addStatusHistoryComment('Invoiced order amount: '.$amount);
+                $order->save();
             }
         }
 
