@@ -1,0 +1,16 @@
+{
+    "name": "itabs/invoice",
+    "license": "OSL-3.0",
+    "type": "magento-module",
+    "description": "Provides the payment method Invoice",
+    "homepage": "https://github.com/itabs/Itabs_Invoice",
+    "authors": [
+        {
+            "name": "Rouven Alexander Rieker",
+            "email": "therouv@googlemail.com"
+        }
+    ],
+    "require":{
+        "magento-hackathon/magento-composer-installer":"*"
+    }
+}

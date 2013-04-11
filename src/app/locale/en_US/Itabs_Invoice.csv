@@ -19,6 +19,8 @@
 "Default: ""0"" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method.","Default: ""0"" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method."
 "Minimum Order Amount","Minimum Order Amount"
 "Default: ""0"" for disabled check | Minimum order amount (in the past) needed for the customer to use this payment method.","Default: ""0"" for disabled check | Minimum order amount (in the past) needed for the customer to use this payment method."
+"Check Open Invoices","Check Open Invoices"
+"Set to ""yes"" if you want to disallow this payment method if a customer has invoices with the invoice state ""Open"".","Set to ""yes"" if you want to disallow this payment method if a customer has invoices with the invoice state ""Open""."
 "Automatically Create Invoice","Automatically Create Invoice"
 "Invoice State","Invoice State"
 "Send Invoice Email","Send Invoice Email"

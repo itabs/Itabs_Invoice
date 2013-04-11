@@ -13,15 +13,23 @@ This extension allows shop owners to provide the payment method "Invoice" to the
 This includes:
 - Complete order via Invoice
 - Generate invoice after order complete
+- Notfiy customer about invoice
+- Several validation rules to check if invoice payment is allowed for the customer
+
+Validation rules are:
+- Check if the customer is in a specified customer group
+- Check if the customer has a specified number of "complete" orders
+- Check if the customer orders reached a specified minimum order amount
+- Check if the customer has invoices with the invoice state "open"
 
 Requirements
 ------------
-- PHP >= 5.2.0
+- PHP >= 5.3.0
 
 Compatibility
 -------------
 - Magento >= 1.6
-- Versions below should work to version 1.4 without any problems but it is not actively tested.
+- Versions below should work down to version 1.4 without any problems but it is not actively tested.
 
 Installation Instructions
 -------------------------
@@ -53,4 +61,4 @@ Licence
 
 Copyright
 ---------
-(c) 2012 ITABS GmbH / Rouven Alexander Rieker
+(c) 2013 ITABS GmbH / Rouven Alexander Rieker
