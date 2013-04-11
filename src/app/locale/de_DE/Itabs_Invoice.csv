@@ -19,6 +19,8 @@
 "Default: ""0"" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method.","Standard: ""0"" für deaktivierte Überprüfung | Mindestanzahl an Bestellugnen (in der Vergangenheit) um diese Zahlungsart benutzen zu dürfen."
 "Minimum Order Amount","Mindestbestellsumme"
 "Default: ""0"" for disabled check | Minimum order amount (in the past) needed for the customer to use this payment method.","Standard: ""0"" für deaktivierte Überprüfung | Mindestbestellsumme (in der Vergangenheit) um diese Zahlungsart benutzen zu dürfen."
+"Check Open Invoices","Offene Rechnungen überprüfen"
+"Set to ""yes"" if you want to disallow this payment method if a customer has invoices with the invoice state ""Open"".","Auf ""Ja"" setzen um die Zahlungsart zu deaktivieren, wenn der Kunden Rechnungen mit dem Status ""Offen"" hat."
 "Automatically Create Invoice","Automatische Rechnungserstellung"
 "Invoice State","Rechnungs-Status"
 "Send Invoice Email","Rechnungsemail versenden"

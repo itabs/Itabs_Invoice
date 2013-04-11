@@ -1,209 +1,210 @@
 <?xml version="1.0"?>
 <!--
 /**
- * This file is part of the Itabs_Invoice module.
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@magentocommerce.com so we can send you a copy immediately.
+ * This file is part of the Itabs_Invoice extension.
  *
  * @category  Itabs
  * @package   Itabs_Invoice
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2011-2013 ITABS GmbH / Rouven Alexander Rieker (http://www.itabs.de)
- * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @copyright 2013 ITABS GmbH (http://www.itabs.de/). All rights served.
+ * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
+ * @version   1.1.0
  * @link      https://github.com/itabs/Itabs_Invoice
  */
  -->
 <config>
-	<sections>
-		<payment>
-			<groups>
-				<invoice translate="label" module="invoice">
-					<label>Invoice</label>
-					<frontend_type>text</frontend_type>
-					<sort_order>31</sort_order>
-					<show_in_default>1</show_in_default>
-					<show_in_website>1</show_in_website>
-					<show_in_store>1</show_in_store>
-					<fields>
-						<active translate="label">
-							<label>Enabled</label>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>0</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</active>
-						<title translate="label">
-							<label>Title</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>5</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</title>
-						<order_status translate="label">
-							<label>New Order Status</label>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_order_status</source_model>
-							<sort_order>10</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</order_status>
-						<sort_order translate="label">
-							<label>Sort Order</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>15</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</sort_order>
-						<allowspecific translate="label">
-							<label>Payment from Applicable Countries</label>
-							<frontend_type>allowspecific</frontend_type>
-							<sort_order>20</sort_order>
-							<source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</allowspecific>
-						<specificcountry translate="label">
-							<label>Payment from Specific Countries</label>
-							<frontend_type>multiselect</frontend_type>
-							<sort_order>25</sort_order>
-							<source_model>adminhtml/system_config_source_country</source_model>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</specificcountry>
-						<payment_due translate="label comment">
-							<label>Payment Due</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>30</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<comment><![CDATA[Number of days within the invoice is payable]]></comment>
-						</payment_due>
-						<text_block_form translate="label comment">
-							<label>Text for Payment Form</label>
-							<frontend_type>textarea</frontend_type>
-							<sort_order>31</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<comment><![CDATA[Text after the selection of the payment method]]></comment>
-						</text_block_form>
-						<text_block_info translate="label comment">
-							<label>Text for Payment Info</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>35</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<comment><![CDATA[Text for the checkout progress info]]></comment>
-						</text_block_info>
-						<min_order_total translate="label">
-							<label>Minimum Order Total</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>40</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</min_order_total>
-						<max_order_total translate="label">
-							<label>Maximum Order Total</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>45</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</max_order_total>
-						<specificgroup_all translate="label comment">
-							<label>Enabled for all customer groups</label>
-							<comment>Set to "no" if you want to enable Invoice payment only for specific customer groups.</comment>
-							<frontend_type>select</frontend_type>
-							<sort_order>50</sort_order>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</specificgroup_all>
-						<specificgroup translate="label">
-							<label>Enabled only for specific customer groups</label>
-							<frontend_type>multiselect</frontend_type>
-							<sort_order>55</sort_order>
-							<source_model>invoice/system_config_source_customer_group</source_model>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<depends>
-								<specificgroup_all>0</specificgroup_all>
-							</depends>
-						</specificgroup>
-						<customer_order_count translate="label comment">
-							<label>Minimum Order Count</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>60</sort_order>
+    <sections>
+        <payment>
+            <groups>
+                <invoice translate="label" module="invoice">
+                    <label>Invoice</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>31</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <title translate="label">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <order_status translate="label">
+                            <label>New Order Status</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_order_status</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </order_status>
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </sort_order>
+                        <allowspecific translate="label">
+                            <label>Payment from Applicable Countries</label>
+                            <frontend_type>allowspecific</frontend_type>
+                            <sort_order>20</sort_order>
+                            <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </allowspecific>
+                        <specificcountry translate="label">
+                            <label>Payment from Specific Countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>25</sort_order>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </specificcountry>
+                        <payment_due translate="label comment">
+                            <label>Payment Due</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Number of days within the invoice is payable]]></comment>
+                        </payment_due>
+                        <text_block_form translate="label comment">
+                            <label>Text for Payment Form</label>
+                            <frontend_type>textarea</frontend_type>
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Text after the selection of the payment method]]></comment>
+                        </text_block_form>
+                        <text_block_info translate="label comment">
+                            <label>Text for Payment Info</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Text for the checkout progress info]]></comment>
+                        </text_block_info>
+                        <min_order_total translate="label">
+                            <label>Minimum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </min_order_total>
+                        <max_order_total translate="label">
+                            <label>Maximum Order Total</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </max_order_total>
+                        <specificgroup_all translate="label comment">
+                            <label>Enabled for all customer groups</label>
+                            <comment>Set to "no" if you want to enable Invoice payment only for specific customer groups.</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>50</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </specificgroup_all>
+                        <specificgroup translate="label">
+                            <label>Enabled only for specific customer groups</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <sort_order>55</sort_order>
+                            <source_model>invoice/system_config_source_customer_group</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <specificgroup_all>0</specificgroup_all>
+                            </depends>
+                        </specificgroup>
+                        <customer_order_count translate="label comment">
+                            <label>Minimum Order Count</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
                             <comment>Default: "0" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method.</comment>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</customer_order_count>
-						<customer_order_amount translate="label comment">
-							<label>Minimum Order Amount</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>65</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customer_order_count>
+                        <customer_order_amount translate="label comment">
+                            <label>Minimum Order Amount</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>65</sort_order>
                             <comment>Default: "0" for disabled check | Minimum order amount (in the past) needed for the customer to use this payment method.</comment>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</customer_order_amount>
-						<create_invoice translate="label comment">
-							<label>Automatically Create Invoice</label>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>70</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</create_invoice>
-						<invoice_state translate="label comment">
-							<label>Invoice State</label>
-							<frontend_type>select</frontend_type>
-							<source_model>invoice/system_config_source_sales_invoice_state</source_model>
-							<sort_order>75</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<depends>
-								<create_invoice>1</create_invoice>
-							</depends>
-						</invoice_state>
-						<send_invoice_email translate="label">
-							<label>Send Invoice Email</label>
-							<frontend_type>select</frontend_type>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>80</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-							<depends>
-								<create_invoice>1</create_invoice>
-							</depends>
-						</send_invoice_email>
-					</fields>
-				</invoice>
-			</groups>
-		</payment>
-	</sections>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customer_order_amount>
+                        <check_open_invoices translate="label comment">
+                            <label>Check Open Invoices</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>70</sort_order>
+                            <comment>Set to "yes" if you want to disallow this payment method if a customer has invoices with the invoice state "Open".</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </check_open_invoices>
+                        <create_invoice translate="label comment">
+                            <label>Automatically Create Invoice</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>75</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </create_invoice>
+                        <invoice_state translate="label comment">
+                            <label>Invoice State</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>invoice/system_config_source_sales_invoice_state</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <create_invoice>1</create_invoice>
+                            </depends>
+                        </invoice_state>
+                        <send_invoice_email translate="label">
+                            <label>Send Invoice Email</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>85</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <create_invoice>1</create_invoice>
+                            </depends>
+                        </send_invoice_email>
+                    </fields>
+                </invoice>
+            </groups>
+        </payment>
+    </sections>
 </config>
