@@ -25,8 +25,6 @@
  */
 class Itabs_Invoice_Model_Observer
 {
-
-
     /**
      * paymentMethodIsActive
      *
