@@ -13,28 +13,28 @@
  */
  -->
 <config>
-	<modules>
-		<Itabs_Invoice>
-			<version>1.0.0</version>
-		</Itabs_Invoice>
-	</modules>
-	<global>
-		<blocks>
-			<invoice>
-				<class>Itabs_Invoice_Block</class>
-			</invoice>
-		</blocks>
-		<helpers>
-			<invoice>
-				<class>Itabs_Invoice_Helper</class>
-			</invoice>
-		</helpers>
-		<models>
-			<invoice>
-				<class>Itabs_Invoice_Model</class>
-			</invoice>
-		</models>
-		<events>
+    <modules>
+        <Itabs_Invoice>
+            <version>1.0.0</version>
+        </Itabs_Invoice>
+    </modules>
+    <global>
+        <blocks>
+            <invoice>
+                <class>Itabs_Invoice_Block</class>
+            </invoice>
+        </blocks>
+        <helpers>
+            <invoice>
+                <class>Itabs_Invoice_Helper</class>
+            </invoice>
+        </helpers>
+        <models>
+            <invoice>
+                <class>Itabs_Invoice_Model</class>
+            </invoice>
+        </models>
+        <events>
             <payment_method_is_active>
                 <observers>
                     <invoice_observer>
@@ -43,49 +43,49 @@
                     </invoice_observer>
                 </observers>
             </payment_method_is_active>
-		</events>
-	</global>
-	<adminhtml>
-		<translate>
-			<modules>
-				<Itabs_Invoice>
-					<files>
-						<default>Itabs_Invoice.csv</default>
-					</files>
-				</Itabs_Invoice>
-			</modules>
-		</translate>
-	</adminhtml>
-	<frontend>
-		<translate>
-			<modules>
-				<Itabs_Invoice>
-					<files>
-						<default>Itabs_Invoice.csv</default>
-					</files>
-				</Itabs_Invoice>
-			</modules>
-		</translate>
-	</frontend>
-	<default>
-		<payment>
-			<invoice>
-				<active>0</active>
-				<model>invoice/invoice</model>
-				<order_status>pending</order_status>
-				<title>Invoice</title>
-				<payment_due>10</payment_due>
-				<payment_action>authorize</payment_action>
-				<allowspecific>0</allowspecific>
-				<specificgroup_all>1</specificgroup_all>
+        </events>
+    </global>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Itabs_Invoice>
+                    <files>
+                        <default>Itabs_Invoice.csv</default>
+                    </files>
+                </Itabs_Invoice>
+            </modules>
+        </translate>
+    </adminhtml>
+    <frontend>
+        <translate>
+            <modules>
+                <Itabs_Invoice>
+                    <files>
+                        <default>Itabs_Invoice.csv</default>
+                    </files>
+                </Itabs_Invoice>
+            </modules>
+        </translate>
+    </frontend>
+    <default>
+        <payment>
+            <invoice>
+                <active>0</active>
+                <model>invoice/invoice</model>
+                <order_status>pending</order_status>
+                <title>Invoice</title>
+                <payment_due>10</payment_due>
+                <payment_action>authorize</payment_action>
+                <allowspecific>0</allowspecific>
+                <specificgroup_all>1</specificgroup_all>
                 <specificgroup>0</specificgroup>
                 <customer_order_count>0</customer_order_count>
-				<customer_order_amount>0</customer_order_amount>
+                <customer_order_amount>0</customer_order_amount>
                 <check_open_invoices>0</check_open_invoices>
                 <create_invoice>0</create_invoice>
                 <invoice_state>1</invoice_state>
                 <send_invoice_email>1</send_invoice_email>
-			</invoice>
-		</payment>
-	</default>
+            </invoice>
+        </payment>
+    </default>
 </config>

@@ -13,13 +13,13 @@
  */
  -->
 <config>
-	<modules>
-		<Itabs_Invoice>
-			<active>true</active>
-			<codePool>community</codePool>
-			<depends>
-				<Mage_Payment />
-			</depends>
-		</Itabs_Invoice>
-	</modules>
+    <modules>
+        <Itabs_Invoice>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Payment />
+            </depends>
+        </Itabs_Invoice>
+    </modules>
 </config>
