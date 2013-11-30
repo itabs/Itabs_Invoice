@@ -8,7 +8,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2013 ITABS GmbH (http://www.itabs.de/). All rights served.
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.0
+ * @version   1.2.0
  * @link      https://github.com/itabs/Itabs_Invoice
  */
  -->
@@ -169,6 +169,38 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </check_open_invoices>
+                        <check_addresses translate="label comment">
+                            <label>Check Address</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>71</sort_order>
+                            <comment>Check if billing address != shipping address. If yes, invoice payment will be disabled.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </check_addresses>
+                        <check_prefix translate="label comment">
+                            <label>Check Prefix</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>72</sort_order>
+                            <comment>Check if the prefix of the billing/shipping address contains a not allowed value. If yes, invoice payment will be disabled.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </check_prefix>
+                        <disabled_prefix translate="label">
+                            <label>Disabled Prefix Options</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>73</sort_order>
+                            <comment><![CDATA[Semicolon (;) separated values.]]></comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <check_prefix>1</check_prefix>
+                            </depends>
+                        </disabled_prefix>
                         <create_invoice translate="label comment">
                             <label>Automatically Create Invoice</label>
                             <frontend_type>select</frontend_type>

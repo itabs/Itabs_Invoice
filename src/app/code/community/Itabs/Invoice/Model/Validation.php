@@ -9,7 +9,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2013 ITABS GmbH (http://www.itabs.de/). All rights served.
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.0
+ * @version   1.2.0
  * @link      https://github.com/itabs/Itabs_Invoice
  */
 /**
@@ -20,7 +20,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2013 ITABS GmbH (http://www.itabs.de/). All rights served.
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.1.0
+ * @version   1.2.0
  * @link      https://github.com/itabs/Itabs_Invoice
  */
 class Itabs_Invoice_Model_Validation
@@ -36,15 +36,26 @@ class Itabs_Invoice_Model_Validation
     protected $_customerOrdersEmail = null;
 
     /**
+     * Check if the invoice payment is allowed
+     *
      * @return bool
      */
     public function isValid()
     {
-        return $this->hasSpecificCustomerGroup()
+        $isValid = $this->hasSpecificCustomerGroup()
             && $this->hasMinimumOrderCount()
             && $this->hasMinimumOrderAmount()
             && $this->hasOpenInvoices()
-            ;
+            && $this->isBillingShippingAddressDifferent()
+            && $this->isPrefixNotAllowed()
+        ;
+
+        $checkResult = new StdClass;
+        $checkResult->isValid = $isValid;
+
+        Mage::dispatchEvent('itabs_invoice_validation_result', array('result' => $checkResult));
+
+        return $checkResult->isValid;
     }
 
     /**
@@ -139,6 +150,7 @@ class Itabs_Invoice_Model_Validation
             $hasOpenInvoices = false;
             foreach ($orders as $order) {
                 /* @var $order Mage_Sales_Model_Order */
+
                 /* @var $invoices Mage_Sales_Model_Resource_Order_Invoice_Collection */
                 $invoices = $order->getInvoiceCollection();
                 if ($invoices->count() > 0) {
@@ -160,6 +172,73 @@ class Itabs_Invoice_Model_Validation
     }
 
     /**
+     * Check if the billing address of a customer is different from the shipping address
+     *
+     * @return bool
+     */
+    public function isBillingShippingAddressDifferent()
+    {
+        // Check if validation is active
+        if (!Mage::getStoreConfigFlag('payment/invoice/check_addresses')) {
+            return true;
+        }
+
+        // Check if there is a quote
+        $quote = $this->_getQuote();
+        if (!$quote || !$quote->getId() || !$quote->getBillingAddress()) {
+            return true;
+        }
+
+        // Serialize the address data and compare if they are different
+        $billingAddress = $this->_serializeQuoteAddress($quote->getBillingAddress());
+        $shippingAddress = $this->_serializeQuoteAddress($quote->getShippingAddress());
+        if ($billingAddress != $shippingAddress) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if the prefix of the billing or shipping address is not allowed
+     *
+     * @return bool
+     */
+    public function isPrefixNotAllowed()
+    {
+        // Check if validation is active
+        if (!Mage::getStoreConfigFlag('payment/invoice/check_prefix')) {
+            return true;
+        }
+
+        // Check if there are disabled prefix options
+        $disabledPrefixes = explode(';', Mage::getStoreConfig('payment/invoice/disabled_prefix'));
+        if (count($disabledPrefixes) == 0) {
+            return true;
+        }
+
+        // Check if there is a quote
+        $quote = $this->_getQuote();
+        if (!$quote || !$quote->getId() || !$quote->getBillingAddress()) {
+            return true;
+        }
+
+        // Check if billing address prefix is disabled
+        $billingAddress = $quote->getBillingAddress();
+        if ($billingAddress && in_array($billingAddress->getPrefix(), $disabledPrefixes)) {
+            return false;
+        }
+
+        // Check if shipping address prefix is disabled
+        $shippingAddress = $quote->getShippingAddress();
+        if ($shippingAddress && in_array($shippingAddress->getPrefix(), $disabledPrefixes)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Retrieve the current session
      *
      * @return Mage_Adminhtml_Model_Session_Quote|Mage_Customer_Model_Session
@@ -175,6 +254,24 @@ class Itabs_Invoice_Model_Validation
         }
 
         return $session;
+    }
+
+    /**
+     * Retrieve the quote object
+     *
+     * @return Mage_Sales_Model_Quote
+     */
+    protected function _getQuote()
+    {
+        if (Mage::app()->getStore()->isAdmin()) {
+            /* @var $quote Mage_Adminhtml_Model_Session_Quote */
+            $quote = Mage::getSingleton('adminhtml/session_quote')->getQuote();
+        } else {
+            /* @var $quote Mage_Customer_Model_Session */
+            $quote = Mage::getSingleton('checkout/session')->getQuote();
+        }
+
+        return $quote;
     }
 
     /**
@@ -253,4 +350,25 @@ class Itabs_Invoice_Model_Validation
 
         return $this->_customerOrders;
     }
+
+    /**
+     * Serialize the given address data for comparison
+     *
+     * @param  Mage_Sales_Model_Quote_Address $address
+     * @return string
+     */
+    protected function _serializeQuoteAddress(Mage_Sales_Model_Quote_Address $address)
+    {
+        return serialize(array(
+            'company' => $address->getCompany(),
+            'prefix' => $address->getPrefix(),
+            'firstname' => $address->getFirstname(),
+            'lastname' => $address->getLastname(),
+            'street' => $address->getStreet(),
+            'postcode' => $address->getPostcode(),
+            'city' => $address->getCity(),
+            'country' => $address->getCountryId()
+        ));
+    }
+
 }
