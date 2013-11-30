@@ -36,6 +36,8 @@ class Itabs_Invoice_Model_Validation
     protected $_customerOrdersEmail = null;
 
     /**
+     * Check if the invoice payment is allowed
+     *
      * @return bool
      */
     public function isValid()
@@ -45,6 +47,7 @@ class Itabs_Invoice_Model_Validation
             && $this->hasMinimumOrderAmount()
             && $this->hasOpenInvoices()
             && $this->isBillingShippingAddressDifferent()
+            && $this->isPrefixNotAllowed()
         ;
 
         $checkResult = new StdClass;
@@ -147,6 +150,7 @@ class Itabs_Invoice_Model_Validation
             $hasOpenInvoices = false;
             foreach ($orders as $order) {
                 /* @var $order Mage_Sales_Model_Order */
+
                 /* @var $invoices Mage_Sales_Model_Resource_Order_Invoice_Collection */
                 $invoices = $order->getInvoiceCollection();
                 if ($invoices->count() > 0) {
@@ -179,10 +183,8 @@ class Itabs_Invoice_Model_Validation
             return true;
         }
 
-        /* @var $quote Mage_Sales_Model_Quote */
-        $quote = Mage::getSingleton('checkout/session')->getQuote();
-
         // Check if there is a quote
+        $quote = $this->_getQuote();
         if (!$quote || !$quote->getId() || !$quote->getBillingAddress()) {
             return true;
         }
@@ -191,6 +193,45 @@ class Itabs_Invoice_Model_Validation
         $billingAddress = $this->_serializeQuoteAddress($quote->getBillingAddress());
         $shippingAddress = $this->_serializeQuoteAddress($quote->getShippingAddress());
         if ($billingAddress != $shippingAddress) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if the prefix of the billing or shipping address is not allowed
+     *
+     * @return bool
+     */
+    public function isPrefixNotAllowed()
+    {
+        // Check if validation is active
+        if (!Mage::getStoreConfigFlag('payment/invoice/check_prefix')) {
+            return true;
+        }
+
+        // Check if there are disabled prefix options
+        $disabledPrefixes = explode(';', Mage::getStoreConfig('payment/invoice/disabled_prefix'));
+        if (count($disabledPrefixes) == 0) {
+            return true;
+        }
+
+        // Check if there is a quote
+        $quote = $this->_getQuote();
+        if (!$quote || !$quote->getId() || !$quote->getBillingAddress()) {
+            return true;
+        }
+
+        // Check if billing address prefix is disabled
+        $billingAddress = $quote->getBillingAddress();
+        if ($billingAddress && in_array($billingAddress->getPrefix(), $disabledPrefixes)) {
+            return false;
+        }
+
+        // Check if shipping address prefix is disabled
+        $shippingAddress = $quote->getShippingAddress();
+        if ($shippingAddress && in_array($shippingAddress->getPrefix(), $disabledPrefixes)) {
             return false;
         }
 
@@ -213,6 +254,24 @@ class Itabs_Invoice_Model_Validation
         }
 
         return $session;
+    }
+
+    /**
+     * Retrieve the quote object
+     *
+     * @return Mage_Sales_Model_Quote
+     */
+    protected function _getQuote()
+    {
+        if (Mage::app()->getStore()->isAdmin()) {
+            /* @var $quote Mage_Adminhtml_Model_Session_Quote */
+            $quote = Mage::getSingleton('adminhtml/session_quote')->getQuote();
+        } else {
+            /* @var $quote Mage_Customer_Model_Session */
+            $quote = Mage::getSingleton('checkout/session')->getQuote();
+        }
+
+        return $quote;
     }
 
     /**
