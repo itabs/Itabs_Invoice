@@ -44,6 +44,7 @@ class Itabs_Invoice_Model_Validation
             && $this->hasMinimumOrderCount()
             && $this->hasMinimumOrderAmount()
             && $this->hasOpenInvoices()
+            && $this->isBillingShippingAddressDifferent()
         ;
 
         $checkResult = new StdClass;
@@ -167,6 +168,36 @@ class Itabs_Invoice_Model_Validation
     }
 
     /**
+     * Check if the billing address of a customer is different from the shipping address
+     *
+     * @return bool
+     */
+    public function isBillingShippingAddressDifferent()
+    {
+        // Check if validation is active
+        if (!Mage::getStoreConfigFlag('payment/invoice/check_addresses')) {
+            return true;
+        }
+
+        /* @var $quote Mage_Sales_Model_Quote */
+        $quote = Mage::getSingleton('checkout/session')->getQuote();
+
+        // Check if there is a quote
+        if (!$quote || !$quote->getId() || !$quote->getBillingAddress()) {
+            return true;
+        }
+
+        // Serialize the address data and compare if they are different
+        $billingAddress = $this->_serializeQuoteAddress($quote->getBillingAddress());
+        $shippingAddress = $this->_serializeQuoteAddress($quote->getShippingAddress());
+        if ($billingAddress != $shippingAddress) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
      * Retrieve the current session
      *
      * @return Mage_Adminhtml_Model_Session_Quote|Mage_Customer_Model_Session
@@ -260,4 +291,25 @@ class Itabs_Invoice_Model_Validation
 
         return $this->_customerOrders;
     }
+
+    /**
+     * Serialize the given address data for comparison
+     *
+     * @param  Mage_Sales_Model_Quote_Address $address
+     * @return string
+     */
+    protected function _serializeQuoteAddress(Mage_Sales_Model_Quote_Address $address)
+    {
+        return serialize(array(
+            'company' => $address->getCompany(),
+            'prefix' => $address->getPrefix(),
+            'firstname' => $address->getFirstname(),
+            'lastname' => $address->getLastname(),
+            'street' => $address->getStreet(),
+            'postcode' => $address->getPostcode(),
+            'city' => $address->getCity(),
+            'country' => $address->getCountryId()
+        ));
+    }
+
 }

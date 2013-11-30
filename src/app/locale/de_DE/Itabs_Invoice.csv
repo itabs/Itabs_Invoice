@@ -25,3 +25,5 @@
 "Invoice State","Rechnungs-Status"
 "Send Invoice Email","Rechnungsemail versenden"
 "Your invoice is payable within %s days.","Die Rechnung ist innerhalb %s Tagen zahlbar."
+"Check Address","Adressüberprüfung aktivieren"
+"Check if billing address != shipping address. If yes, invoice payment will be disabled.","Prüfe, ob die Rechnungsadresse != der Lieferadresse ist. Falls ja, wird die Zahlung auf Rechnung deaktiviert."
