@@ -40,11 +40,18 @@ class Itabs_Invoice_Model_Validation
      */
     public function isValid()
     {
-        return $this->hasSpecificCustomerGroup()
+        $isValid = $this->hasSpecificCustomerGroup()
             && $this->hasMinimumOrderCount()
             && $this->hasMinimumOrderAmount()
             && $this->hasOpenInvoices()
-            ;
+        ;
+
+        $checkResult = new StdClass;
+        $checkResult->isValid = $isValid;
+
+        Mage::dispatchEvent('itabs_invoice_validation_result', array('result' => $checkResult));
+
+        return $checkResult->isValid;
     }
 
     /**
