@@ -4,3 +4,4 @@ src/app/design/frontend/base/default/template/invoice/      app/design/frontend/
 src/app/etc/modules/Itabs_Invoice.xml                       app/etc/modules/Itabs_Invoice.xml
 src/app/locale/de_DE/Itabs_Invoice.csv                      app/locale/de_DE/Itabs_Invoice.csv
 src/app/locale/en_US/Itabs_Invoice.csv                      app/locale/en_US/Itabs_Invoice.csv
+src/app/locale/nb_NO/Itabs_Invoice.csv                      app/locale/nb_NO/Itabs_Invoice.csv
