@@ -87,6 +87,7 @@
                 <create_invoice>0</create_invoice>
                 <invoice_state>1</invoice_state>
                 <send_invoice_email>1</send_invoice_email>
+                <calculate_due_date>0</calculate_due_date>
             </invoice>
         </payment>
     </default>

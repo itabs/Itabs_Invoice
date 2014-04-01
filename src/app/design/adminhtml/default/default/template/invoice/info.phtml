@@ -18,7 +18,11 @@
 $method = $this->getMethod();
 ?>
 <p><?php echo $method->getTitle() ?></p>
-<p><?php echo $this->__('Your invoice is payable within %s days.', $method->getConfigData('payment_due'))?></p>
+<?php if ($dueDate = $this->getDueDate()): ?>
+    <p><?php echo $this->__('Your invoice is due on %s.', $dueDate)?></p>
+<?php else: ?>
+    <p><?php echo $this->__('Your invoice is payable within %s days.', $method->getConfigData('payment_due'))?></p>
+<?php endif; ?>
 <?php if ($method->getConfigData('text_block_info')): ?>
     <p><?php echo $method->getConfigData('text_block_info') ?></p>
 <?php endif; ?>

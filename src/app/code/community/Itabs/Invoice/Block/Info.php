@@ -56,4 +56,38 @@ class Itabs_Invoice_Block_Info extends Mage_Payment_Block_Info
     {
         return $this->getInfo()->getMethodInstance()->getCode();
     }
+
+    /**
+     * Retrieve the due date for the order
+     *
+     * @return bool|string
+     */
+    public function getDueDate()
+    {
+        // Check if we are in the order mode
+        if (!($this->getInfo() instanceof Mage_Sales_Model_Order_Payment)) {
+            return false;
+        }
+
+        // Check if we should calculate the due date
+        $calculateDay = (bool) $this->getMethod()->getConfigData('calculate_due_date');
+        if (!$calculateDay) {
+            return false;
+        }
+
+        // Check if there is a payment due value set
+        $paymentDue = $this->getMethod()->getConfigData('payment_due');
+        if (empty($paymentDue) || $paymentDue <= 0) {
+            return false;
+        }
+
+        /* @var $order Mage_Sales_Model_Order */
+        $order = $this->getInfo()->getOrder();
+
+        $date = Mage::app()->getLocale()->storeDate($order->getStoreId(), $order->getCreatedAt(), false);
+        $date->addDay($paymentDue);
+        $dueDate = $date->toString(Mage::app()->getLocale()->getDateFormat());
+
+        return $dueDate;
+    }
 }
