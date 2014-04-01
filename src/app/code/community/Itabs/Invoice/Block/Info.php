@@ -84,9 +84,9 @@ class Itabs_Invoice_Block_Info extends Mage_Payment_Block_Info
         /* @var $order Mage_Sales_Model_Order */
         $order = $this->getInfo()->getOrder();
 
-        $date = Mage::app()->getLocale()->storeDate($order->getStoreId(), $order->getCreatedAt(), false);
+        $date = Mage::app()->getLocale()->storeDate($order->getStoreId(), strtotime($order->getCreatedAt()), false);
         $date->addDay($paymentDue);
-        $dueDate = $date->toString(Mage::app()->getLocale()->getDateFormat());
+        $dueDate = $date->toString(Mage::app()->getLocale()->getDateFormatWithLongYear());
 
         return $dueDate;
     }
