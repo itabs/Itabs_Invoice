@@ -1,0 +1,71 @@
+tables:
+  sales/order:
+    - entity_id: 1
+      store_id: 1
+      customer_id: 1
+      quote_id: 1
+      increment_id: 100000001
+      base_currency_code: EUR
+      state: processing
+      status: processing
+      is_virtual: 0
+      base_grand_total: 399.98
+      base_shipping_amount: 0
+      base_subtotal: 399.98
+      grand_total: 399.98
+      subtotal: 399.98
+      billing_address_id: 1000
+      shipping_address_id: 1001
+      customer_email: test.tester@musterfirma.com
+      customer_firstname: Test
+      customer_lastname: Test
+      created_at: "2014-04-01 19:00:00"
+
+  sales/order_address:
+    - entity_id: 1000
+      parent_id: 1
+      customer_address_id: 1
+      region: Bayern
+      postcode: 99999
+      street: Musterstraße 99
+      city: Musterstadt
+      firstname: Test
+      lastname: Tester
+      email: test.tester@musterfirma.com
+      country_id: DE
+      address_type: billing
+
+    - entity_id: 1001
+      parent_id: 1
+      customer_address_id: 1
+      region: Bayern
+      postcode: 99999
+      street: Musterstraße 99
+      city: Musterstadt
+      firstname: Test
+      lastname: Tester
+      email: test.tester@musterfirma.com
+      country_id: DE
+      address_type: shipping
+
+  sales/order_item:
+    - item_id: 10001
+      order_id: 1
+      store_id: 1
+      product_id: 10
+      base_price: 199.99
+      price: 199.99
+      is_qty_decimal: 0
+      qty_ordered: 2
+      row_total: 399.98
+      name: 'Test Product 1'
+      sku: test-product-1
+
+  sales/order_payment:
+    - entity_id: 1
+      parent_id: 1
+      method: invoice
+
+  sales/quote:
+    - entity_id: 1
+      store_id: 1

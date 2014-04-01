@@ -91,4 +91,11 @@
             </invoice>
         </payment>
     </default>
+    <phpunit>
+        <suite>
+            <modules>
+                <Itabs_Invoice/>
+            </modules>
+        </suite>
+    </phpunit>
 </config>
