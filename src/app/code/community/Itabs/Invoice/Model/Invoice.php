@@ -28,8 +28,9 @@ class Itabs_Invoice_Model_Invoice extends Mage_Payment_Model_Method_Abstract
     protected $_isGateway               = false;
     protected $_canAuthorize            = false;
     protected $_canCapture              = true;
-    protected $_canCapturePartial       = false;
+    protected $_canCapturePartial       = true;
     protected $_canRefund               = false;
+    protected $_canRefundInvoicePartial = true;
     protected $_canVoid                 = false;
     protected $_canUseInternal          = true;
     protected $_canUseCheckout          = true;
