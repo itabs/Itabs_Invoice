@@ -8,7 +8,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2013 ITABS GmbH (http://www.itabs.de/). All rights served.
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.2.0
+ * @version   1.3.0
  * @link      https://github.com/itabs/Itabs_Invoice
  */
  -->
@@ -85,10 +85,20 @@
                             <show_in_store>1</show_in_store>
                             <comment><![CDATA[Number of days within the invoice is payable]]></comment>
                         </payment_due>
+                        <calculate_due_date translate="label comment">
+                            <label>Calculate Due Date</label>
+                            <comment><![CDATA[Calculate the due date for the invoice based on the order date (e.g. Order Date: 10.03.2014, Payment Due: 10 days => Due date: 20.03.2014).]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </calculate_due_date>
                         <text_block_form translate="label comment">
                             <label>Text for Payment Form</label>
                             <frontend_type>textarea</frontend_type>
-                            <sort_order>31</sort_order>
+                            <sort_order>32</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>

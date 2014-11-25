@@ -9,7 +9,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2013 ITABS GmbH (http://www.itabs.de/). All rights served.
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.2.0
+ * @version   1.3.0
  * @link      https://github.com/itabs/Itabs_Invoice
  */
 /**
@@ -20,7 +20,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2013 ITABS GmbH (http://www.itabs.de/). All rights served.
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.2.0
+ * @version   1.3.0
  * @link      https://github.com/itabs/Itabs_Invoice
  */
 class Itabs_Invoice_Model_Invoice extends Mage_Payment_Model_Method_Abstract
@@ -28,8 +28,9 @@ class Itabs_Invoice_Model_Invoice extends Mage_Payment_Model_Method_Abstract
     protected $_isGateway               = false;
     protected $_canAuthorize            = false;
     protected $_canCapture              = true;
-    protected $_canCapturePartial       = false;
+    protected $_canCapturePartial       = true;
     protected $_canRefund               = false;
+    protected $_canRefundInvoicePartial = true;
     protected $_canVoid                 = false;
     protected $_canUseInternal          = true;
     protected $_canUseCheckout          = true;

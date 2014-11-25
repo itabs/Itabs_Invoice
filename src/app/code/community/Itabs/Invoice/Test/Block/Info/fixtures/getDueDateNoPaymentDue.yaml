@@ -1,0 +1,3 @@
+config:
+  default/payment/invoice/calculate_due_date: 1
+  default/payment/invoice/payment_due: 0

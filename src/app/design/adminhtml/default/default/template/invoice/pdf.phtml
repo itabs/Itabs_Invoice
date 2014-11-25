@@ -7,7 +7,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2013 ITABS GmbH (http://www.itabs.de/). All rights served.
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.2.0
+ * @version   1.3.0
  * @link      https://github.com/itabs/Itabs_Invoice
  */
 ?>
@@ -19,7 +19,11 @@ $method = $this->getMethod();
 ?>
 <?php echo $this->escapeHtml($method->getTitle()) ?>
     {{pdf_row_separator}}
-<?php echo $this->__('Your invoice is payable within %s days.', $method->getConfigData('payment_due'))?>
+<?php if ($dueDate = $this->getDueDate()): ?>
+    <?php echo $this->__('Your invoice is due on %s.', $dueDate)?>
+<?php else: ?>
+    <?php echo $this->__('Your invoice is payable within %s days.', $method->getConfigData('payment_due'))?>
+<?php endif; ?>
     {{pdf_row_separator}}
 <?php if ($method->getConfigData('text_block_info')): ?>
     <?php echo $method->getConfigData('text_block_info') ?>

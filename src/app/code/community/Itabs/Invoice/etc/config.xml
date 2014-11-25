@@ -8,7 +8,7 @@
  * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
  * @copyright 2013 ITABS GmbH (http://www.itabs.de/). All rights served.
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.2.0
+ * @version   1.3.0
  * @link      https://github.com/itabs/Itabs_Invoice
  */
  -->
@@ -87,7 +87,15 @@
                 <create_invoice>0</create_invoice>
                 <invoice_state>1</invoice_state>
                 <send_invoice_email>1</send_invoice_email>
+                <calculate_due_date>0</calculate_due_date>
             </invoice>
         </payment>
     </default>
+    <phpunit>
+        <suite>
+            <modules>
+                <Itabs_Invoice/>
+            </modules>
+        </suite>
+    </phpunit>
 </config>
