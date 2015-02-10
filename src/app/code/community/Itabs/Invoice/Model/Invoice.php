@@ -12,6 +12,7 @@
  * @version   1.3.0
  * @link      https://github.com/itabs/Itabs_Invoice
  */
+
 /**
  * Invoice Model
  *
@@ -25,16 +26,16 @@
  */
 class Itabs_Invoice_Model_Invoice extends Mage_Payment_Model_Method_Abstract
 {
-    protected $_isGateway               = false;
-    protected $_canAuthorize            = false;
-    protected $_canCapture              = true;
-    protected $_canCapturePartial       = true;
-    protected $_canRefund               = false;
+    protected $_isGateway = false;
+    protected $_canAuthorize = false;
+    protected $_canCapture = true;
+    protected $_canCapturePartial = true;
+    protected $_canRefund = false;
     protected $_canRefundInvoicePartial = true;
-    protected $_canVoid                 = false;
-    protected $_canUseInternal          = true;
-    protected $_canUseCheckout          = true;
-    protected $_canUseForMultishipping  = false;
+    protected $_canVoid = false;
+    protected $_canUseInternal = true;
+    protected $_canUseCheckout = true;
+    protected $_canUseForMultishipping = false;
 
     /**
      * unique internal payment method identifier
@@ -59,33 +60,45 @@ class Itabs_Invoice_Model_Invoice extends Mage_Payment_Model_Method_Abstract
 
     /**
      * (non-PHPdoc)
+     *
      * @see Mage_Payment_Model_Method_Abstract::authorize()
      */
     public function authorize(Varien_Object $payment, $amount)
     {
-        if (Mage::getStoreConfigFlag('payment/'.$this->getCode().'/create_invoice')) {
+        if (Mage::getStoreConfigFlag('payment/' . $this->getCode() . '/create_invoice')) {
             /* @var $order Mage_Sales_Model_Order */
             $order = $payment->getOrder();
             $realOrderId = $payment->getOrder()->getRealOrderId();
             $order->loadByIncrementId($realOrderId);
 
             if ($order->canInvoice()) {
+                $invoiceState = (int)$this->getConfigData('invoice_state');
+
                 /* @var $invoice Mage_Sales_Model_Order_Invoice */
                 $invoice = $order->prepareInvoice();
-                $invoice->register()->capture();
+                $invoice->register();
+
+                // Capture if invoice should be marked as paid
+                if ($invoiceState == Mage_Sales_Model_Order_Invoice::STATE_PAID) {
+                    $invoice->capture();
+                }
+
                 Mage::getModel('core/resource_transaction')
                     ->addObject($invoice)
-                    ->addObject($invoice->getOrder())->save();
+                    ->addObject($invoice->getOrder())
+                    ->save();
                 $order->addRelatedObject($invoice);
 
-                $invoice->setState($this->getConfigData('invoice_state'));
+                $invoice->setState($invoiceState);
 
-                if (Mage::getStoreConfigFlag('payment/'.$this->getCode().'/send_invoice_email')) {
+                if (Mage::getStoreConfigFlag('payment/' . $this->getCode() . '/send_invoice_email')) {
                     $invoice->sendEmail();
                 }
 
                 // Add comment to order history
-                $order->addStatusHistoryComment('Invoiced order amount: '.$amount);
+                $order->addStatusHistoryComment(
+                    sprintf('Invoiced order amount of %s', Mage::helper('core')->formatPrice($amount, false))
+                );
                 $order->save();
             }
         }
