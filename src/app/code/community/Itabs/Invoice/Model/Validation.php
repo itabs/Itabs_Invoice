@@ -6,22 +6,15 @@
  *
  * @category  Itabs
  * @package   Itabs_Invoice
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2013 ITABS GmbH (http://www.itabs.de/). All rights served.
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2013-2015 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.3.0
+ * @version   1.4.0
  * @link      https://github.com/itabs/Itabs_Invoice
  */
+
 /**
  * Validation model
- *
- * @category  Itabs
- * @package   Itabs_Invoice
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2013 ITABS GmbH (http://www.itabs.de/). All rights served.
- * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.3.0
- * @link      https://github.com/itabs/Itabs_Invoice
  */
 class Itabs_Invoice_Model_Validation
 {
@@ -47,8 +40,7 @@ class Itabs_Invoice_Model_Validation
             && $this->hasMinimumOrderAmount()
             && $this->hasOpenInvoices()
             && $this->isBillingShippingAddressDifferent()
-            && $this->isPrefixNotAllowed()
-        ;
+            && $this->isPrefixNotAllowed();
 
         $checkResult = new StdClass;
         $checkResult->isValid = $isValid;
@@ -328,7 +320,7 @@ class Itabs_Invoice_Model_Validation
     /**
      * Retrieve the order collection of a specific customer
      *
-     * @param  int $customerId
+     * @param  int $customerId Customer ID
      * @return Mage_Sales_Model_Resource_Order_Collection
      */
     protected function _getCustomerOrders($customerId)
@@ -354,20 +346,20 @@ class Itabs_Invoice_Model_Validation
     /**
      * Serialize the given address data for comparison
      *
-     * @param  Mage_Sales_Model_Quote_Address $address
+     * @param  Mage_Sales_Model_Quote_Address $address Quote Address
      * @return string
      */
     protected function _serializeQuoteAddress(Mage_Sales_Model_Quote_Address $address)
     {
         return serialize(array(
-            'company' => $address->getCompany(),
-            'prefix' => $address->getPrefix(),
+            'company'   => $address->getCompany(),
+            'prefix'    => $address->getPrefix(),
             'firstname' => $address->getFirstname(),
-            'lastname' => $address->getLastname(),
-            'street' => $address->getStreet(),
-            'postcode' => $address->getPostcode(),
-            'city' => $address->getCity(),
-            'country' => $address->getCountryId()
+            'lastname'  => $address->getLastname(),
+            'street'    => $address->getStreet(),
+            'postcode'  => $address->getPostcode(),
+            'city'      => $address->getCity(),
+            'country'   => $address->getCountryId()
         ));
     }
 
