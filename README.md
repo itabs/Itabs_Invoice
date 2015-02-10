@@ -61,4 +61,4 @@ Licence
 
 Copyright
 ---------
-(c) 2013 ITABS GmbH / Rouven Alexander Rieker
+(c) 2013-2015 ITABS GmbH / Rouven Alexander Rieker

@@ -6,8 +6,8 @@
  *
  * @category  Itabs
  * @package   Itabs_Invoice
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2013 ITABS GmbH (http://www.itabs.de/). All rights served.
+ * @author    ITABS GmbH <info@itabs.de>
+ * @copyright 2013-2015 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
  * @version   1.3.0
  * @link      https://github.com/itabs/Itabs_Invoice
@@ -15,14 +15,6 @@
 
 /**
  * Invoice Model
- *
- * @category  Itabs
- * @package   Itabs_Invoice
- * @author    Rouven Alexander Rieker <rouven.rieker@itabs.de>
- * @copyright 2013 ITABS GmbH (http://www.itabs.de/). All rights served.
- * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.3.0
- * @link      https://github.com/itabs/Itabs_Invoice
  */
 class Itabs_Invoice_Model_Invoice extends Mage_Payment_Model_Method_Abstract
 {
@@ -59,9 +51,13 @@ class Itabs_Invoice_Model_Invoice extends Mage_Payment_Model_Method_Abstract
     protected $_infoBlockType = 'invoice/info';
 
     /**
-     * (non-PHPdoc)
+     * Authorize the invoice, create invoice if config setting is correct
      *
-     * @see Mage_Payment_Model_Method_Abstract::authorize()
+     * @param  Varien_Object $payment Payment Object
+     * @param  float         $amount  Authorize Amount
+     * @return Itabs_Invoice_Model_Invoice
+     * @throws Exception
+     * @throws bool
      */
     public function authorize(Varien_Object $payment, $amount)
     {
