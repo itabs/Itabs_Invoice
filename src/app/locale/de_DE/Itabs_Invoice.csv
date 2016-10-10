@@ -34,3 +34,4 @@
 "Your invoice is due on %s.","Die Rechnung ist zahlbar bis zum %s."
 "Calculate Due Date","Berechne Fälligkeitsdatum"
 "Calculate the due date for the invoice based on the order date (e.g. Order Date: 10.03.2014, Payment Due: 10 days => Due date: 20.03.2014).","Berechne das Fälligkeitsdatum für die Rechnung anhand dem Bestelldatum (z.B. Bestelldatum: 10.03.2014, Zahlungsziel: 10 Days => Fälligkeitsdatum: 20.03.2014)."
+"Payable promptly without deduction upon receipt of invoice.","Zahlbar nach Erhalt der Rechnung ohne Abzug."
