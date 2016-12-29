@@ -16,7 +16,7 @@
 "Set to ""no"" if you want to enable Invoice payment only for specific customer groups.","Auf ""nein"" setzen um die Zahlungsart nur für bestimmte Kundengruppen zu erlauben"
 "Enabled only for specific customer groups","Aktiviert für bestimmte Kundengruppen"
 "Minimum Order Count","Mindestbestellanzahl"
-"Default: ""0"" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method.","Standard: ""0"" für deaktivierte Überprüfung | Mindestanzahl an Bestellugnen (in der Vergangenheit) um diese Zahlungsart benutzen zu dürfen."
+"Default: ""0"" for disabled check | Minimum count of orders (in the past) needed for the customer to use this payment method.","Standard: ""0"" für deaktivierte Überprüfung | Mindestanzahl an Bestellungen (in der Vergangenheit) um diese Zahlungsart benutzen zu dürfen."
 "Minimum Order Amount","Mindestbestellsumme"
 "Default: ""0"" for disabled check | Minimum order amount (in the past) needed for the customer to use this payment method.","Standard: ""0"" für deaktivierte Überprüfung | Mindestbestellsumme (in der Vergangenheit) um diese Zahlungsart benutzen zu dürfen."
 "Check Open Invoices","Offene Rechnungen überprüfen"
