@@ -29,3 +29,4 @@
 "Invoice State","Fakturastatus"
 "Send Invoice Email","Send faktura-epost"
 "Your invoice is payable within %s days.","Din faktura må betales innen %s dager."
+"Payable promptly without deduction upon receipt of invoice.","Betales omgående uten fradrag ved mottak av faktura."
