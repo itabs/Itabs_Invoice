@@ -1,5 +1,5 @@
 {
-    "name": "itabs/invoice",
+    "name": "newtown/itabs-invoice",
     "license": "OSL-3.0",
     "type": "magento-module",
     "description": "Provides the payment method Invoice",
@@ -11,6 +11,9 @@
         }
     ],
     "require":{
-        "magento-hackathon/magento-composer-installer":"*"
+        "magento-hackathon/magento-composer-installer": "*"
+    },
+    "replace": {
+        "itabs/invoice": "*"
     }
 }
