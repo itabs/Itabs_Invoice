@@ -4,7 +4,7 @@ This extension allows shop owners to provide the payment method "Invoice" to the
 
 Facts
 -----
-- Version: 1.4.0
+- Version: 1.5.0
 - [extension on GitHub](https://github.com/itabs/Itabs_Invoice)
 
 Description

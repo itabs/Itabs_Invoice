@@ -7,7 +7,7 @@
  * @author    ITABS GmbH <info@itabs.de>
  * @copyright 2013-2015 ITABS GmbH (http://www.itabs.de)
  * @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
- * @version   1.4.0
+ * @version   1.5.0
  * @link      https://github.com/itabs/Itabs_Invoice
  */
 ?>
@@ -18,13 +18,19 @@
 $method = $this->getMethod();
 ?>
 <?php echo $this->escapeHtml($method->getTitle()) ?>
-    {{pdf_row_separator}}
+{{pdf_row_separator}}
 <?php if ($dueDate = $this->getDueDate()): ?>
-    <?php echo $this->__('Your invoice is due on %s.', $dueDate)?>
+    <?php echo $this->__('Your invoice is due on %s.', $dueDate) ?>
 <?php else: ?>
-    <?php echo $this->__('Your invoice is payable within %s days.', $method->getConfigData('payment_due'))?>
+    <?php if ((int)$method->getConfigData('payment_due') > 0): ?>
+        <?php echo $this->__('Your invoice is payable within %s days.',
+            $method->getConfigData('payment_due')) ?>
+    <?php else: ?>
+        <?php echo $this->__('Payable promptly without deduction upon receipt of invoice.',
+            $method->getConfigData('payment_due')) ?>
+    <?php endif; ?>
 <?php endif; ?>
-    {{pdf_row_separator}}
+{{pdf_row_separator}}
 <?php if ($method->getConfigData('text_block_info')): ?>
     <?php echo $method->getConfigData('text_block_info') ?>
 <?php endif; ?>

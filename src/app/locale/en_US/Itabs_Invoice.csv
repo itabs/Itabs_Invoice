@@ -25,3 +25,4 @@
 "Invoice State","Invoice State"
 "Send Invoice Email","Send Invoice Email"
 "Your invoice is payable within %s days.","Your invoice is payable within %s days."
+"Payable promptly without deduction upon receipt of invoice.","Payable promptly without deduction upon receipt of invoice."
